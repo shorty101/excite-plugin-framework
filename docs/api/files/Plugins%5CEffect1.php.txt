@@ -1,0 +1,11 @@
+<?php 
+if (!function_exists("Effect1")) {
+    function Effect1($img_name, $torf) {
+        include "/AllowedPlugins.php";
+        if (getType($torf) === $plugin_type["Effect1"]) {
+            print_r("Enacting Effect1 on " . $img_name);
+        }
+    }
+}
+?>
+

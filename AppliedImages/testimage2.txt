@@ -1,0 +1,1 @@
+{"Radius":35,"Size":"200px","Effect2":false,"Effect3":false,"Effect1":false}

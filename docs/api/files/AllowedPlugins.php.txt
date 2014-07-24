@@ -1,0 +1,31 @@
+<?php
+
+/**
+ * This is the config file for all plugins. As can be seen each plugin may be active or inactive,
+ * each plugin is typed and each type has a default value.
+ */
+
+$plugins = array(
+    "Effect1" => true,
+    "Effect2" => true,
+    "Effect3" => true,
+    "Radius" => true,
+    "Size" => true
+);
+
+$plugin_type = array(
+    "Effect1" => "boolean",
+    "Effect2" => "boolean",
+    "Effect3" => "boolean",
+    "Radius" => "integer",
+    "Size" => "string"
+);
+
+$default_vals = array(
+    "boolean" => false,
+    "integer" => 0,
+    "string" => ""
+);
+
+?>
+

@@ -1,0 +1,53 @@
+<?php
+
+if (!function_exists("GetImages")) {
+    /**
+     * Calling this script will return all images and their current transformation state.
+     *
+     * <pre>
+     * Output:
+     * <code>
+     * array(
+     *  "Effect1" => true,
+     *  "Effect2" => false,
+     *  "Effect3" => true,
+     *  "Radius" => 35,
+     *  "Size" => 200px
+     * ));
+     * </code>
+     * </pre>
+     */
+    function GetImages() {
+        include "classes/image.php";
+        include "AllowedPlugins.php";
+        foreach ($plugins as $plugin => $active) {
+            if ($active === true) {
+                include "Plugins/" . $plugin . ".php";
+            }
+        }
+
+        $imageNames = array();
+        $allImages = array();
+
+        $path = dirname(__FILE__) . "/OriginalImages";
+        $dir = new DirectoryIterator($path);
+        foreach ($dir as $fileinfo) {
+            if (!$fileinfo->isDot()) {
+                $imageName = pathinfo($path . "/" . $fileinfo->getFilename())['filename'];
+                $imageNames[] = $imageName;
+                $imageDetails = file_get_contents("AppliedImages/" . $imageName . ".txt");
+                $imageDetails = json_decode($imageDetails, true);
+                $allImages[$imageName] = new Image($imageName, $imageDetails);
+            }
+        }
+
+        foreach ($allImages as $name=>$image) {
+            return $image;
+        }
+    }
+}
+
+GetImages();
+
+?>
+
